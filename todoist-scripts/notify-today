@@ -1,0 +1,10 @@
+#!/bin/sh
+
+while true; do
+  todoist-cli sync
+  tasks=$(todoist-cli l --filter today | wc -l)
+  if [ "$tasks" -ne "0" ];then
+    notify-send 'Tasks left' 'You have '$tasks' left for today.' --icon=dialog-information
+  fi
+  sleep 1800;
+done

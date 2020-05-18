@@ -1,0 +1,15 @@
+#!/bin/sh
+#This script is for the express purpose of watching, cleaning and then placing the file in their map which is based on their file name.
+
+inotifywait -m --exclude "(?=.*^\[HorribleSubs\] ).*\[1080p\].mkv$" ${1} -e create -e moved_to --exclude '/\..+'|
+    while read path action file; do
+        echo "The file '$file' appeared in directory '$path' via '$action'"
+
+	#This will check if it has the correct format
+		test="${file#*] }"
+		test="${test% -*}"
+		#this is the location of the directory
+		location=$path$test
+		[ ! -d "$location" ] && mkdir "${location}"
+		mv "$path$file" "$location"
+    done

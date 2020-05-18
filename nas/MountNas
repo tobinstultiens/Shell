@@ -1,0 +1,32 @@
+#!/bin/bash
+#This script is for mounting my nas to the mnt
+
+if [ -z "$1" ]
+then
+	PS3='Please enter your destination: '
+	options=("/mnt/stultnas" "/media/NAS" "Quit")
+	select opt in "${options[@]}"
+	do
+		case $opt in
+			"/mnt/stultnas")
+				location='/mnt/stultnas'
+				break
+				;;
+			"/media/NAS")
+				location='/media/NAS'
+				break
+				;;
+			"Quit")
+				exit 0
+				break
+				;;
+			*) echo "invalid option $REPLY";;
+		esac
+	done
+else
+	location=$1
+fi
+
+umount $location
+[ ! -d $location ] && mkdir $location
+sshfs -o allow_other,IdentityFile=/home/tobins/.ssh/id_rsa stultiensnas@192.168.178.31:/ $location
