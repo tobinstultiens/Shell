@@ -26,14 +26,17 @@ function load() {
 
 choice=$(load | dmenu -i -l 15 -p "Add/Open bookmark:")
 
-if $has_n_option; then
-	case "$choice" in
-		Add) dmenu-bm-add ;;
- 		*) $BROWSER --new-window ${bmarray[$choice]} ;;
-	esac
-else
-	case "$choice" in
-  	Add) dmenu-bm-add ;;
- 		*) $BROWSER ${bmarray[$choice]} ;;
-	esac
+if [[ ! -z "$choice" ]]; then
+	if $has_n_option; then
+		case "$choice" in
+			Add) dmenu-bm-add ;;
+ 			*) $BROWSER --new-window ${bmarray[$choice]} ;;
+		esac
+	else
+		case "$choice" in
+  		Add) dmenu-bm-add ;;
+ 			*) $BROWSER ${bmarray[$choice]} ;;
+		esac
+	fi
 fi
+
