@@ -1,5 +1,12 @@
 #!/bin/sh
 
+has_n_option=false
+while getopts :n opt; do
+    case $opt in 
+        n) has_n_option=true ;;
+    esac
+done
+
 declare -A g bmarray;
 
 while IFS=\| read -r guid date id url title tags;
@@ -19,7 +26,14 @@ function load() {
 
 choice=$(load | dmenu -i -l 15 -p "Add/Open bookmark:")
 
-case "$choice" in
-  Add) dmenu-bm-add ;;
-  *) bm -o ${bmarray[$choice]} ;;
-esac
+if $has_n_option; then
+	case "$choice" in
+		Add) dmenu-bm-add ;;
+ 		*) $BROWSER --new-window ${bmarray[$choice]} ;;
+	esac
+else
+	case "$choice" in
+  	Add) dmenu-bm-add ;;
+ 		*) $BROWSER ${bmarray[$choice]} ;;
+	esac
+fi
