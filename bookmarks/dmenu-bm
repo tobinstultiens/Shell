@@ -1,0 +1,25 @@
+#!/bin/sh
+
+declare -A g bmarray;
+
+while IFS=\| read -r guid date id url title tags;
+do
+  bookmark="$title "-" "$url" "-" "$tags"";
+  bmarray["$bookmark"]="$url";
+done < ~/bm.lnk
+
+function load() {
+  while IFS=\| read -r guid date id url title tags;
+  do
+    bookmark="$title "-" "$url" "-" "$tags"";
+    printf "$bookmark\n";
+	done < ~/bm.lnk
+  printf
+}
+
+choice=$(load | dmenu -i -l 15 -p "Add/Open bookmark:")
+
+case "$choice" in
+  Add) dmenu-bm-add ;;
+  *) bm -o ${bmarray[$choice]} ;;
+esac
