@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Variables
+CONFIG=$XDG_CONFIG_HOME/configs/configs.lnk 
+
+declare -A g cmarray;
+
+while IFS=\| read -r title file;
+do
+	configmark="$title";
+	cmarray["$configmark"]="$file";
+done < $CONFIG
+
+function load() {
+	while IFS=\| read -r title file;
+	do
+		configmark=$title;
+		printf "$configmark\n";
+	done < $CONFIG
+}
+
+choice=$(load | dmenu -i -l 15 -p "Open configuration:")
+
+if [[ ! -z "$choice" ]]; then
+	FILE=${cmarray[$choice]}
+	[[ $FILE == ~* ]] && FILE=${cmarray[$choice]/'~'/$HOME} && echo "~"
+	[[ $FILE == '$HOME'* ]] && FILE=${cmarray[$choice]/'$HOME'/$HOME} && echo $HOME
+	$EDITOR $FILE
+fi

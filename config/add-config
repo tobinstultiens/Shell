@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# Variables
+CONFIG=$XDG_CONFIG_HOME/configs/configs.lnk 
+
+# Validation
+[[ ! -f "$1" ]] && echo "Invalid parameter was given as configuration file" && exit
+[[ -z "$2" ]] && echo "No title was given to the file" && exit
+[[ ! -f $CONFIG ]] && install -D /dev/null $CONFIG
+
+FILE=$(readlink -f $1)
+FILE=${FILE/$HOME/'$HOME'}
+
+echo $2"|"$FILE >> $CONFIG
