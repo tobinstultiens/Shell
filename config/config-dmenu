@@ -25,5 +25,5 @@ if [[ ! -z "$choice" ]]; then
 	FILE=${cmarray[$choice]}
 	[[ $FILE == ~* ]] && FILE=${cmarray[$choice]/'~'/$HOME} && echo "~"
 	[[ $FILE == '$HOME'* ]] && FILE=${cmarray[$choice]/'$HOME'/$HOME} && echo $HOME
-	$EDITOR $FILE
+	$TERMINAL -e $EDITOR $FILE
 fi
