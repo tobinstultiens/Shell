@@ -18,7 +18,7 @@ scripts(){
 	do
 		location=$(readlink -f $u)
 		file=$(echo $u | sed 's/.*\///')
-		ln -s $location /bin/$file
+		sudo ln -s $location /bin/$file
 	done
 }
 
