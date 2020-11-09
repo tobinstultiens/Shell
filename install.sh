@@ -1,7 +1,7 @@
 declare -a scriptarray
 
 install(){
-	yay -S scrot imagemagick i3lock sshfs cutycapt --needed
+	yay -S scrot imagemagick i3lock sshfs --needed
 	register
 	scripts
 }
@@ -11,6 +11,7 @@ register(){
 	scriptarray+=(config/add-config)
 	scriptarray+=(config/config-dmenu)
 	scriptarray+=(i3/customi3lock)
+	scriptarray+=(voice/pulse-switch)
 }
 
 scripts(){
