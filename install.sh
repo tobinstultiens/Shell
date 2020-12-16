@@ -14,6 +14,7 @@ register(){
 	scriptarray+=(config/config-dmenu)
 	scriptarray+=(i3/customi3lock)
 	scriptarray+=(voice/pulse-switch)
+	scriptarray+=(steam/steam-dmenu.py)
 }
 
 scripts(){
