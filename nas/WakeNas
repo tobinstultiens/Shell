@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+action="$1"
+case "$action" in
+   suspend|hibernate) stuff ;;
+   resume|thaw)       sshfs -o IdentityFile=~/.ssh/id_rsa stultiensnas@192.168.178.31:/ /mnt/stultnas;;
+esac

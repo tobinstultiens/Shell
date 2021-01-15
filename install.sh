@@ -6,6 +6,7 @@ install(){
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	register
 	scripts
+	wakeupscript
 }
 
 register(){
@@ -24,6 +25,10 @@ scripts(){
 		file=$(echo $u | sed 's/.*\///')
 		sudo ln -s $location /bin/$file
 	done
+}
+
+wakeupscript(){
+	sudo ln -s nas/WakeNas /etc/pm/sleep.d/WakeNas
 }
 
 if pacman -Qs yay > /dev/null ; then
