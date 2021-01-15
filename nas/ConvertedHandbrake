@@ -1,12 +1,14 @@
 #!/bin/bash
 while IFS= read -r file; do
-	echo $file
 	filename=${file##*/}
-	filename=${filename% -*}
-	season=${filename##*-}
+	filename=${filename%.*}
+	folder=${filename% -*}
+	season=${folder##*-}
 	season=${season:2:2}
-	filename=${filename% -*}
-	location=$(find /mnt/stultnas/Tobin/ -type d -name "$filename")
+	folder=${folder% -*}
+	location=$(find /mnt/stultnas/Tobin/ -type d -name "$folder")
+	find "${location}/Season ${season}/" -type f -name "${filename}*" -delete
+	echo "Removed ${filename}"
 	mv "$file" "${location}/Season ${season}"
 	echo "Moved $file"
 done < <(find /mnt/stultnas/Tobin/Converted -type f)
