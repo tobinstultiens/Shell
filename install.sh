@@ -16,6 +16,7 @@ register(){
 	scriptarray+=(i3/customi3lock)
 	scriptarray+=(voice/pulse-switch)
 	scriptarray+=(steam/steam-dmenu.py)
+	scriptarray+=(nas/ConvertedHandbrake)
 }
 
 scripts(){
