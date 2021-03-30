@@ -1,0 +1,3 @@
+#!/bin/sh
+runescape-launcher &
+$BROWSER --new-window runescape.wiki

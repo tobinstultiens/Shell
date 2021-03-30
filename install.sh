@@ -1,7 +1,7 @@
 declare -a scriptarray
 
 install(){
-	yay -S scrot imagemagick i3lock sshfs cutycapt fzf npm lf python texlive-most zathura dragon-drag-and-drop --needed
+	paru scrot imagemagick i3lock sshfs cutycapt fzf npm lf python texlive-most zathura dragon-drag-and-drop --needed
 	pip install neovim
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	register
@@ -15,8 +15,9 @@ register(){
 	scriptarray+=(config/config-dmenu)
 	scriptarray+=(i3/customi3lock)
 	scriptarray+=(voice/pulse-switch)
-	scriptarray+=(steam/steam-dmenu.py)
+	scriptarray+=(games/steam-dmenu.py)
 	scriptarray+=(nas/ConvertedHandbrake)
+	scriptarray+=(games/runescape)
 }
 
 scripts(){
@@ -32,9 +33,9 @@ wakeupscript(){
 	sudo ln -s nas/WakeNas /etc/pm/sleep.d/WakeNas
 }
 
-if pacman -Qs yay > /dev/null ; then
+if pacman -Qs paru > /dev/null ; then
 	install
 else
-	sudo pacman -S yay
+	sudo pacman -S paru
 	install
 fi
