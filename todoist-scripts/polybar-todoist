@@ -1,0 +1,8 @@
+#!/bin/sh
+
+todoist-cli sync
+tasks=$(todoist-cli l --filter overdue | grep "00:00" | wc -l)
+if [ "$tasks" -ne "0" ];then
+    echo "$tasks"
+fi
+exit 1

@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 todoist-cli sync
-tasks=$(todoist-cli l --filter today | grep "00:00" | wc -l)
+tasks=$(todoist-cli l --filter overdue | grep "00:00" | wc -l)
 if [ "$tasks" -ne "0" ];then
   sudo -u tobins DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus notify-send 'Tasks left' 'You have '$tasks' left for today.' --icon=dialog-information
 fi
