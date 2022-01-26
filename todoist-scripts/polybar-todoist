@@ -1,8 +1,12 @@
 #!/bin/sh
 
 todoist-cli sync
+sleep 1
 tasks=$(todoist-cli l --filter overdue | grep "00:00" | wc -l)
-if [ "$tasks" -ne "0" ];then
+re='^[0-9]+$'
+if ! [[ $tasks =~ $re ]] ; then
+   echo "0"
+else
     echo "$tasks"
 fi
 exit 1
