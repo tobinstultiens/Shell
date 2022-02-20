@@ -1,12 +1,11 @@
 declare -a scriptarray
 
 install(){
-	yay scrot imagemagick i3lock sshfs cutycapt fzf npm lf python texlive-most zathura dragon-drag-and-drop --needed
+	yay -S zsh flameshot scrot imagemagick sshfs cutycapt fzf npm lf python texlive-most zathura dragon-drag-and-drop spotify picom todoist polybar mailspring --needed
 	pip install neovim
 	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	register
 	scripts
-	wakeupscript
 }
 
 register(){
