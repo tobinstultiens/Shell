@@ -32,9 +32,9 @@ wakeupscript(){
 	sudo ln -s nas/WakeNas /etc/pm/sleep.d/WakeNas
 }
 
-if pacman -Qs yay > /dev/null ; then
-	install
-else
-	sudo pacman -S yay
-	install
-fi
+#if pacman -Qs yay > /dev/null ; then
+#	install
+#else
+#	sudo pacman -S yay
+#	install
+#fi
